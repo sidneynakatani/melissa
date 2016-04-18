@@ -1,5 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var Auth = require('./model/auth.js');
 var app = express();
 
 mongoose.connect('mongodb://admin:zarman12@ds059205.mongolab.com:59205/ragdoll');
@@ -10,19 +11,7 @@ db.once('open', function() {
   console.log(' connected!');
 });
 
-var testeSchema = new mongoose.Schema({teste: String});
-var Teste = mongoose.model('Teste',testeSchema);
-var testando = new Teste({
-  teste: 'teste'
-});
-
-testando.save(function(err, testando){
-    if(err){
-        return console.error(err);
-    }
-    console.log('gravado');
-    
-});
+Auth.findByHash('abcb12hfdtrysooeoeo');
 
 app.set('port', (process.env.PORT || 5000));
 
